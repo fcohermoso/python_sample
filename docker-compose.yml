@@ -1,0 +1,25 @@
+
+services:
+  acestream-service:
+    image: vstavrinov/acestream-service:latest
+    container_name: acestream
+    ports:
+      - 8000:8000
+    environment:
+      - SCHEME=http
+      - ENTRY=8000
+      - PORT=8000
+    volumes:
+      - /home/kiko/ace:/root/.ACEStream
+
+  threadfin:
+    image: fyb3roptik/threadfin
+    container_name: threadfin
+    ports:
+      - 34400:34400
+    environment:
+      - TZ=Europe/Madrid
+    volumes:
+      - /home/kiko/threadfin/conf:/home/threadfin/conf
+      - /home/kiko/threadfin/temp:/tmp/threadfin:rw
+    restart: unless-stopped
